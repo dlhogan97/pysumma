@@ -6,6 +6,7 @@ Use the `environment.yml` file to set up.
 # Install MiniForge
 **Note: to make my life easier, I did a clean install of miniforge, here are the direstions on how to do that:**
 Cleaned python install - installed miniforge:
+
 	1. *Important!!!* Save all environments to some local lcations
 	2. Uninstall anaconda (this will delete everything, so make sure you're okay with that!)
 	3. Uninstalled miniconda (if you have miniconda)
@@ -13,6 +14,7 @@ Cleaned python install - installed miniforge:
 	5. Ran miniforge on my computer
 
 Once installed:
+
 	6. Clean.bash_profile to not include any anaconda references
 	7. Checked PATH variables to make sure that the correct reference to miniforge is made
 	8. I had some issues with creating a new environment from the prior yaml file
