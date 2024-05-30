@@ -1,0 +1,21 @@
+controlVersion       'SUMMA_FILE_MANAGER_V3.0.0' !  filemanager_version
+simStartTime         '2010-10-01 00:00' ! 
+simEndTime           '2017-08-01 23:00' ! 
+tmZoneInfo           'localTime' ! 
+settingsPath         './data//cues/summa_setup/settings/' !  settings_path
+forcingPath          './data//cues/summa_setup/forcings/' !  input_path
+outputPath           './data//cues/summa_setup/output/' !  output_path
+decisionsFile        'decisions.txt' !  decisions_path
+outputControlFile    'output_control.txt' !  output_control
+globalHruParamFile   '../params/local_param_info.txt' !  local_param_info
+globalGruParamFile   '../params/basin_param_info.txt' !  basin_param_info
+attributeFile        '../params/local_attributes.nc' !  local_attributes
+trialParamFile       '../params/parameter_trial.nc' !  parameter_trial
+forcingListFile      '../forcings/forcing_file_list.txt' !  forcing_file_list
+initConditionFile    '../params/initial_conditions.nc' !  model_init_cond
+outFilePrefix        'template_output' !  output_prefix
+vegTableFile         'VEGPARM.TBL' ! 
+soilTableFile        'SOILPARM.TBL' ! 
+generalTableFile     'GENPARM.TBL' ! 
+noahmpTableFile      'MPTABLE.TBL' ! 
+! history Wed Aug 26 15:19:35 2020: /Users/nijssen/Dropbox/code/summa/utils/convert_summa_config_v2_v3.py cues/summa_setup/settings/file_manager_cues.txt
