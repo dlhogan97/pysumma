@@ -3,7 +3,7 @@
 # Local PySumma Setup
 Use the `environment.yml` file to set up. 
 
-# Install MiniForge
+# Install MiniForge (Highly recommended! Maybe even required?)
 **Note: to make my life easier, I did a clean install of miniforge, here are the direstions on how to do that:**
 Cleaned python install - installed miniforge:
 
@@ -28,6 +28,20 @@ Once installed:
 		- May try running this command conda env export -n py36 -f py36.yml --from-history. Can also do a "--no-builds" which may work
 		- This pretty much worked. Lastly had to run mamba init bash in my bash terminal to get it to work there too.
 		From <https://stackoverflow.com/questions/55554431/conda-fails-to-create-environment-from-yml> 
+
+### To produce forcing file:
+1. Ensure `metpy`, `metloom`, and `metsim` are installed (this should automatically be done if using the default environment file)
+2. Run the `snotel_to_pysumma.ipynb` notebook *note that this file will be updated to a script in the future*, this will create a number of folders in the root directory.
+### To run pysumma on this new file:
+1. In the `tutorial/data` folder copy the `cues` folder and rename the copied folder to relate to your file (`my_site`).
+2. Move the new forcing file in `./model/forcings` to the `tutorial/data/my_site/data` folder.
+3. Copy this name file to the `tutorial/data/my_site/summa_setup/` folder.
+4. Open `tutorial/data/my_site/summa_setup/forcing_file_list.txt` and change the filename to be the name of your forcing file.
+5. Open `tutorial/data/my_site/summa_setup/file_manager.txt` and change *simEndTime* and *simStartTime* to reflect the start and end times of your forcing file. These are printed out at the end of the `snotel_to_pysumma.ipynb`.
+6. In this same file, ensure that *settingsPath*, *forcingPath*, and *outputPath* are all correct. It is likely that they need to be updated to your site name.
+7. Open `summa_run_tutorial.ipynb` and update `filemanager` variable in the first cell to the locaiton of `tutorial/data/my_site/summa_setup/file_manager.txt`
+8. Run the code and get your SUMMA run!
+
 
 # Tips & Tricks
 - Even though HRU may be irrelevant, the order of forcing files **MUST** be (time, HRU) within the forcing dataset. 

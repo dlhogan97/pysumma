@@ -20,8 +20,11 @@ dependencies:
   - pandas
   - jupyter
   - pip
+  - metsim
+  - metpy
   - summa>=3.0.3
   - pysumma>=3.0.3
   - pip:
     - hs_restclient
     - nbsphinx
+    - metloom
