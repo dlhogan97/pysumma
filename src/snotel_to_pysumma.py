@@ -120,6 +120,7 @@ replace = {'ACCUMULATED PRECIPITATION':'accppt','AIR TEMP':'airtemp', 'datetime'
 df.rename(columns=replace, inplace=True)
 df.set_index('time', inplace=True)
 
+# Save the snotel data to a csv
 df.to_csv('./snotel_csvs/'+out_name+'.csv')
 
 # add 'SNOWDEPTH' and 'SNOWDEPTH_units' to the droplist if it decides to work again
@@ -277,18 +278,21 @@ for varname in ['prec', 't_min', 't_max']:
                                name=varname)
     
 # Resample precip to daily
-prec_vals = spinup['pptrate'].resample('D').sum()
+prec_vals = spinup['pptrate'].resample('D').sum().to_xarray()
+prec_vals['time'] = pd.to_datetime(prec_vals.time.values)
 
 # Resample the data to daily frequency and calculate the maximum and minimum temperatures
-tmax_vals = spinup['airtemp'].resample('D').max()
-tmin_vals = spinup['airtemp'].resample('D').min()
+tmax_vals = spinup['airtemp'].resample('D').max().to_xarray()
+tmax_vals['time'] = pd.to_datetime(tmax_vals.time.values)
+tmin_vals = spinup['airtemp'].resample('D').min().to_xarray()
+tmin_vals['time'] = pd.to_datetime(tmin_vals.time.values)
 
 # Do precip data
-state['prec'].values[:, 0, 0] = prec_vals
+state['prec'] = prec_vals
 
 # And now temp data and convert to C
-state['t_min'].values[:, 0, 0] = tmin_vals
-state['t_max'].values[:, 0, 0] = tmax_vals
+state['t_min'] = tmin_vals
+state['t_max'] = tmax_vals
 state.to_netcdf('./input/rc_state.nc')
 
 # %%
@@ -307,9 +311,9 @@ params = {
     'chunks'       : 
         {'lat': 1, 'lon': 1},
     'forcing_vars' : 
-        {'prec' : 'prec', 't_max': 't_max', 't_min': 't_min'},
+        {'prec' : 'prec', 't_max': 't_max', 't_min': 't_min', 'lat': 'lat', 'lon': 'lon',},
     'state_vars'   : 
-        {'prec' : 'prec', 't_max': 't_max', 't_min': 't_min'},
+        {'prec' : 'prec', 't_max': 't_max', 't_min': 't_min', 'lat': 'lat', 'lon': 'lon',},
     'domain_vars'  : 
         {'elev': 'elev', 'lat': 'lat', 'lon': 'lon', 'mask': 'mask'}
     }               

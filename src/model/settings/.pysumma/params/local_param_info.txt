@@ -5,11 +5,11 @@ upperBoundTheta           |       0.2004 |       0.1020 |       0.3680
 lowerBoundTheta           |       0.1100 |       0.1020 |       0.3680
 upperBoundTemp            |     272.1600 |     270.1600 |     280.1600
 lowerBoundTemp            |     274.1600 |     270.1600 |     280.1600
-tempCritRain              |     274.1500 |     274.1500 |     274.1500
+tempCritRain              |     273.1500 |     273.1500 |     273.1500
 tempRangeTimestep         |       2.0000 |       0.5000 |       5.0000
 frozenPrecipMultip        |       1.0000 |       0.5000 |       1.5000
 snowfrz_scale             |      50.0000 |      10.0000 |    1000.0000
-fixedThermalCond_snow     |       0.3500 |       0.1000 |       1.0000
+fixedThermalCond_snow     |       0.3500 |       0.3500 |       0.3500
 albedoMax                 |       0.8400 |       0.7000 |       0.9500
 albedoMinWinter           |       0.5500 |       0.6000 |       1.0000
 albedoMinSpring           |       0.5500 |       0.3000 |       1.0000

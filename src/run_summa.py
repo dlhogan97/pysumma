@@ -44,11 +44,17 @@ s.decisions['snowDenNew'] = 'hedAndPom'
 s.decisions['compaction'] = 'consettl'
 s.decisions['astability'] = 'mahrtexp'
 
-s.global_hru_params['tempCritRain'] = 274.15
+if "Paradise" in forcing_file:
+    rain_snow_partition = 1
+elif "Stevens" in forcing_file:
+    rain_snow_partition = -1
+else:
+    rain_snow_partition = 0
+s.global_hru_params['tempCritRain'] = 273.15 + rain_snow_partition
 s.global_hru_params['newSnowDenMin'] = 100
 s.global_hru_params['densScalGrowth'] = 0.10
 s.global_hru_params['densScalOvrbdn'] = 0.025
-# s.global_hru_params['fixedThermalCond_snow'] = 0.35
+s.global_hru_params['fixedThermalCond_snow'] = 0.35
 
 # Add in some additional variables so we can demonstrate plotting capabilities
 output_settings = {'period': 1, 'instant': 1, 'sum': 0, 
@@ -71,7 +77,11 @@ out_name = os.path.splitext(forcing_file)[0]
 s.run('local', run_suffix=out_name)
 
 # %%
-print(s.status)
+if s.status == 'Success':
+    print('Model run successfully!')
+else:
+    print('Model run failed!')
+    print(s.stderr)
 
 # %%
 

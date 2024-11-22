@@ -1,6 +1,6 @@
 controlVersion                       'SUMMA_FILE_MANAGER_V3.0.0'
 simStartTime                         '2024-10-01 00:00'
-simEndTime                           '2024-11-21 07:00'
+simEndTime                           '2024-11-21 23:00'
 tmZoneInfo                           'localTime'
 settingsPath                         '/home/dlhogan/GitHub/pysumma/src/model/settings/.pysumma/Wells_Creek/'
 forcingPath                          './forcings/'

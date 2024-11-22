@@ -1,8 +1,8 @@
 #!/bin/bash
-
+mamba activate pysumma
 # Define your sets of inputs
-site_codes=("679:WA:SNTL" "791:WA:SNTL" "642:WA:SNTL" "909:WA:SNTL") # "974:WA:SNTL" "863:WA:SNTL" "679:WA:SNTL" "791:WA:SNTL"  "788:WA:SNTL" "672:WA:SNTL")
-site_names=("Paradise" "Stevens_Pass" "Morse_Lake" "Wells_Creek") # "Waterhole" "White Pass" "Stampede Pass" "Olallie Meadows")
+site_codes=("679:WA:SNTL" "791:WA:SNTL" "642:WA:SNTL" "909:WA:SNTL" "974:WA:SNTL" "863:WA:SNTL" "679:WA:SNTL" "791:WA:SNTL"  "788:WA:SNTL" "672:WA:SNTL")
+site_names=("Paradise" "Stevens_Pass" "Morse_Lake" "Wells_Creek" "Waterhole" "White Pass" "Stampede Pass" "Olallie Meadows")
 
 # Get the length of the arrays
 length=${#site_codes[@]}
@@ -38,5 +38,10 @@ for ((i=0; i<$length; i++)); do
   python3 ./src/run_summa.py
 
   echo "summa run for $input3 complete, check output folder for output file"
+
+  # Run the visualizations
+  echo -e "$input3" | python3 ./src/produce_visualizations.py
+
+  echo "visualizations for $input3 complete, check ./src/output/figures folder for plots"
 
 done
