@@ -13,7 +13,7 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
 # %%
-os.chdir('./src')
+os.chdir('/home/dlhogan/GitHub/pysumma/src/')
 executable = 'summa.exe'
 filemanager = './model/settings/file_manager.txt'
 
@@ -47,7 +47,7 @@ s.decisions['astability'] = 'mahrtexp'
 if "Paradise" in forcing_file:
     rain_snow_partition = 1
 elif "Stevens" in forcing_file:
-    rain_snow_partition = -1
+    rain_snow_partition = -2
 else:
     rain_snow_partition = 0
 s.global_hru_params['tempCritRain'] = 273.15 + rain_snow_partition

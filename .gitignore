@@ -165,3 +165,6 @@ forcings/
 output/
 input/
 snotel_csvs/
+.pysumma/
+settings/
+file_manager.txt

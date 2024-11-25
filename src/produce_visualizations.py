@@ -11,7 +11,7 @@ import pysumma.plotting as psp
 import matplotlib.colors as colors
 
 # %%
-os.chdir('./src/')
+os.chdir('/home/dlhogan/GitHub/pysumma/src/')
 
 # Select site and read in data
 name = input('Enter site name: ')
@@ -37,7 +37,7 @@ density = summa_df.isel(hru=0)['mLayerVolFracWat']*1000
 density = density.where(density>=0, np.nan)
 
 # %%
-snow_depth_obs = df.loc[pd.to_datetime(depth.time.values.min()):]['SNOWDEPTH'].resample('12h').max().shift()  * 2.54/100
+snow_depth_obs = df.loc[pd.to_datetime(depth.time.values.min()):]['SNOWDEPTH'].resample('1D').max().shift()  * 2.54/100
 # replace below zero values with 0
 snow_depth_obs[snow_depth_obs < 0] = 0
 # replace nan values with nan
@@ -54,7 +54,7 @@ a = np.arange(-20,5,1)
 # Bins normalized between 0 and 1
 norm = [(float(i)-min(a))/(max(a)-min(a)) for i in a]
 
-# Color tuple for every bin
+# Color tuple for every bin from Brian Blaylock
 C = np.array([[145,0,63],
               [206,18,86],
               [231,41,138],
@@ -131,27 +131,32 @@ density_cmap = colors.LinearSegmentedColormap.from_list("density", COLORS)
 # create the inverse
 density_cmap_r = colors.LinearSegmentedColormap.from_list("density_r", COLORS_r)
 
+# depth scalar
+if "Stevens" in name:
+    scale_depth = 1
+else: 
+    scale_depth = 1
 # %%
 yfig, ax = plt.subplots(figsize=(8,5))
-psp.layers(temp, depth, colormap=temp_cmap, plot_soil=False, plot_snow=True, cbar_kwargs={'label': 'Temperature (C)', 'ticks':np.arange(-10,1,1)}, variable_range=[-10, 1], ax=ax)
-summa_df['scalarSnowDepth'].plot(color='k', linewidth=2, ax=ax, label='SUMMA Modeled Snow Depth');
+psp.layers(temp, (depth/scale_depth), colormap=temp_cmap, plot_soil=False, plot_snow=True, cbar_kwargs={'label': 'Temperature (C)', 'ticks':np.arange(-10,1,1)}, variable_range=[-10, 1], ax=ax)
+(summa_df['scalarSnowDepth']/scale_depth).plot(color='k', linewidth=2, ax=ax, label='SUMMA Modeled Snow Depth');
 snow_depth_obs.plot(color='red', ls='--', linewidth=2, ax=ax, label='Observed Snow Depth');
 ax.legend()
 ax.set_title(f"{name} Snow Depth\n{snow_depth_obs.index.min().strftime('%Y-%m-%d %H:%M')} to {snow_depth_obs.index.max().strftime('%Y-%m-%d %H:%M')}\nElevation: {df['geometry'].iloc[0][-5:-1]} ft")
 ax.set_ylabel('Snow Depth (m)')
 ax.set_xlabel('Date')
-yfig.savefig(f"../src/output/figures/{name.replace(' ','_')}_temp_with_obs_recent.png")
+yfig.savefig(f"../src/figures/{name.replace(' ','_')}_temp_with_obs_recent.png")
 
 # %%
 yfig, ax = plt.subplots(figsize=(8,5))
-psp.layers(density, depth, colormap=density_cmap_r, plot_soil=False, plot_snow=True, cbar_kwargs={'label': 'Density (kg/m$^3$)', 'ticks':np.arange(100,400,30)}, variable_range=[100, 400], ax=ax)
-summa_df['scalarSnowDepth'].plot(color='k', linewidth=2, ax=ax, label='SUMMA Modeled Snow Depth');
+psp.layers(density, depth/scale_depth, colormap=density_cmap_r, plot_soil=False, plot_snow=True, cbar_kwargs={'label': 'Density (kg/m$^3$)', 'ticks':np.arange(100,400,30)}, variable_range=[100, 400], ax=ax)
+(summa_df['scalarSnowDepth']/scale_depth).plot(color='k', linewidth=2, ax=ax, label='SUMMA Modeled Snow Depth');
 snow_depth_obs.plot(color='red', ls='--', linewidth=2, ax=ax, label='Observed Snow Depth');
 ax.legend()
 ax.set_title(f"{name} Snow Depth\n{snow_depth_obs.index.min().strftime('%Y-%m-%d %H:%M')} to {snow_depth_obs.index.max().strftime('%Y-%m-%d %H:%M')}\nElevation: {df['geometry'].iloc[0][-5:-1]} ft")
 ax.set_ylabel('Snow Depth (m)')
 ax.set_xlabel('Date')
 
-yfig.savefig(f"../src/output/figures/{name.replace(' ','_')}_density_with_obs_recent.png")
+yfig.savefig(f"../src/figures/{name.replace(' ','_')}_density_with_obs_recent.png")
 
 

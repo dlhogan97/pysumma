@@ -61,7 +61,7 @@ from utils import lw_clr
 from utils import forcing_filler as ff
 from utils import summa_check as sc
 
-os.chdir('./src/')
+os.chdir('/home/dlhogan/GitHub/pysumma/src/')
 
 # %%
 #  Create needed directories to store metsim run and snotel CSVs
