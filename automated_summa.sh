@@ -48,7 +48,5 @@ for ((i=0; i<$length; i++)); do
 
 done
 
-# push changes to figures folder to GitHub
-git add /home/dlhogan/GitHub/pysumma/src/figures
-git commit -m "adding figures for $input3"
-git push
+# Push all new files to dropbox
+python3 /home/dlhogan/GitHub/pysumma/src/push_to_dropbox.py

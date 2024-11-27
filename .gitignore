@@ -168,3 +168,6 @@ snotel_csvs/
 .pysumma/
 settings/
 file_manager.txt
+.dropbox_token
+automated_summa.sh
+dropbox.json
